@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag & Drop</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <main class="container mx-auto my-3">
+      <div class="d-flex gap-3">
+        <div
+          id="drop-on-me-babe"
+          class="col-8 border border-1 border-primary rounded p-3"
+        ></div>
+        <div
+          id="drag-from-me-babe"
+          class="col border border-1 border-primary rounded p-3"
+        >
+          <div class="mb-3">
+            <label class="fw-bold form-label">Nombre</label>
+            <input type="text" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold form-label">Teléfono</label>
+            <input type="tel" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold form-label">Email</label>
+            <input type="email" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <h2 class="h2">Código generado:</h2>
+        <div
+          id="html-form-code"
+          class="form-control my-3 border border-1 border-primary rounded overflow-auto"
+          style="height: 350px"
+        ></div>
+      </div>
+
+      <div id="result" class="alert alert-primary" role="alert"></div>
+      <button>Generar form</button>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script>
+      const dropZone = document.querySelector("#drop-on-me-babe"); // Contenedor que recibirá los elementos
+      const dragZone = document.querySelector("#drag-from-me-babe"); // Contenedor del que se arrastrarán los elementos
+      const htmlCode = document.querySelector("#html-form-code"); // Código HTML generado, lo guardaríamos en la base de datos
+
+      new Sortable(dropZone, {
+        group: "shared",
+        animation: 150, // Añadimos una pequeña animación cuando se ordenen los elementos
+        onChange() {
+          htmlCode.textContent = dropZone.innerHTML; // Si el contenido del contenedor cambia, actualizamos el código HTML
+        },
+      });
+
+      new Sortable(dragZone, {
+        group: {
+          name: "shared", // Debe tener el mismo nombre de grupo que los contenedores con los que queramos interactuar
+          pull: "clone", // Si arrastramos un elemento, debemos clonarlo en lugar de moverlo
+          put: false, // No queremos que se puedan arrastrar elementos a este contenedor
+        },
+        sort: false, // En este contenedor no queremos cambiar el orden de los elementos
+      });
+
+      // Evento para demostración, si hacemos doble click en un elemento, se borrará del DOM
+      dropZone.addEventListener("dblclick", (e) => {
+        if (e.target !== dropZone) {
+          // Si el target no es igual al propio contenedor...
+          if (e.target.children.length === 0) return;
+          // y si tiene hijos...
+          dropZone.removeChild(e.target); // borramos el elemento...
+          htmlCode.textContent = dropZone.innerHTML; // y actualizamos el código HTML
+        }
+      });
+
+      document.querySelector("button").addEventListener("click", async () => {
+        const form = await fetch("/forms/create", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: dropZone.innerHTML }),
+        });
+
+        const data = await form.json();
+        if (form.ok) {
+          document.querySelector(
+            "#result"
+          ).textContent = `Comparte este formulario con: http://localhost:3000/forms/${data.id}`;
+        }
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>
