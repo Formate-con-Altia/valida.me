@@ -1,0 +1,41 @@
+{
+  "name": "valida.me",
+  "version": "1.0.0",
+  "description": "Creación de formularios dinámicos",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Formate-con-Altia/valida.me.git"
+  },
+  "keywords": [
+    "form",
+    "validation"
+  ],
+  "author": "Equipo estudiantes Altia - Vigo 2021-2022",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Formate-con-Altia/valida.me/issues"
+  },
+  "homepage": "https://github.com/Formate-con-Altia/valida.me#readme",
+  "dependencies": {
+    "dotenv": "^14.3.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.2",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
