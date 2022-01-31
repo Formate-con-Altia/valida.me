@@ -11,6 +11,11 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
@@ -26,17 +31,17 @@
         >
           <div class="mb-3">
             <label class="fw-bold form-label">Nombre</label>
-            <input type="text" class="form-control" />
+            <input type="text" name="name" class="form-control" />
           </div>
 
           <div class="mb-3">
             <label class="fw-bold form-label">Teléfono</label>
-            <input type="tel" class="form-control" />
+            <input type="tel" name="tel" class="form-control" />
           </div>
 
           <div class="mb-3">
             <label class="fw-bold form-label">Email</label>
-            <input type="email" class="form-control" />
+            <input type="email" name="email" class="form-control" />
           </div>
         </div>
       </div>
@@ -50,8 +55,9 @@
         ></div>
       </div>
 
-      <div id="result" class="alert alert-primary" role="alert"></div>
-      <button>Generar form</button>
+      <div id="alert-placeholder"></div>
+
+      <button class="btn btn-primary">Crear formulario</button>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
@@ -88,23 +94,48 @@
         }
       });
 
-      document.querySelector("button").addEventListener("click", async () => {
-        const form = await fetch("/forms/create", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data: dropZone.innerHTML }),
-        });
+      // Creamos una función que recibe una clase alert (success, info, error...) y un mensaje.
+      // Para más información sobre las clases alert visitar: https://getbootstrap.com/docs/5.1/components/alerts/
+      const createFeedbackMessage = (type, message) => {
+        const alertPlaceholder = document.querySelector("#alert-placeholder");
+        const wrapper = document.createElement("div");
 
-        const data = await form.json();
-        if (form.ok) {
-          document.querySelector(
-            "#result"
-          ).textContent = `Comparte este formulario con: http://localhost:3000/forms/${data.id}`;
+        wrapper.innerHTML =
+          '<div class="alert alert-' +
+          type +
+          ' alert-dismissible" role="alert">' +
+          message +
+          '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+
+        alertPlaceholder.append(wrapper);
+      };
+
+      document.querySelector("button").addEventListener("click", async () => {
+        try {
+          const response = await fetch("/forms/create", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ data: dropZone.innerHTML }),
+          });
+
+          if (!response.ok) {
+            const errorMessage =
+              "¡El formulario no se ha podido guardar! Prueba nuevamente en unos minutos.";
+
+            throw new Error(errorMessage);
+          }
+
+          const data = await response.json(); // Obtenemos los datos del servidor
+          const successMessage = `¡Formulario creado correctamente! Puedes visualizarlo en <a href="http://localhost:3000/forms/${data.id}" class="alert-link" target="_blank">http://localhost:3000/forms/${data.id}</a>.`;
+          // Si todo ha ido bien, confirmamos la creación del formulario
+          createFeedbackMessage("success", successMessage);
+        } catch (error) {
+          // Si algo ha fallado, enviamos feedback al usuario
+          createFeedbackMessage("danger", error);
         }
-        console.log(data);
       });
     </script>
   </body>

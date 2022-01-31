@@ -1,4 +1,3 @@
-const { Mongoose } = require("mongoose");
 const Form = require("../models/forms");
 
 const createForm = (req, res) => {
@@ -15,4 +14,17 @@ const createNewForm = async (req, res) => {
   res.status(201).send({ id: form._id });
 };
 
-module.exports = { createForm, createNewForm };
+const getCreatedForm = async (req, res) => {
+  try {
+    const { id } = req.params;
+    // if (mongoose.Types.ObjectId.isValid(id))
+    const form = await Form.findOne({ _id: id });
+
+    res.status(200).render("forms/id", { form });
+  } catch (error) {
+    console.error(error);
+    res.status(404).send("Recurso no existente");
+  }
+};
+
+module.exports = { createForm, createNewForm, getCreatedForm };
