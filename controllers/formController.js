@@ -1,9 +1,9 @@
 const Form = require("../models/forms");
 const mongoose = require("mongoose");
 const { parse } = require("node-html-parser");
+const { slugify } = require("../lib/helpers");
 
 const createForm = (req, res) => {
-  console.log(req.params);
   res.render("forms/index");
 };
 
@@ -20,21 +20,12 @@ const createNewForm = async (req, res) => {
     .querySelectorAll("input, textarea")
     .map((elm, i) => {
       return {
-        name: elm.attrs.name,
+        name: `${slugify(parsedLabels[i])}[${i}]`,
         input: elm.attrs.type,
         label: parsedLabels[i],
       };
     });
-  // const fieldSchema = new Schema({
-  //     input: {
-  //         type: String,
-  //         enum: ["tel", "text", "email"],
-  //     },
-  //     name: String,
-  //     label: String
-  // })
 
-  console.log(...parsedInputs);
   const form = await new Form({
     fields: parsedInputs,
   }).save();
