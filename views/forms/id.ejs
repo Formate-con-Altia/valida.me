@@ -8,9 +8,20 @@
 
 <body>
   <div class="container mx-auto my-4">
-    <form action="" method="post" class="needs-validation" novalidate>
-      <%- form.html %>
-        <button class="btn btn-primary" type="submit">Enviar</button>
+    <form action="" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+      <% form.fields.forEach(el=> { %>
+        <div class="mb-3">
+          <label for="<%= el.name %>" class="fw-bold form-label">
+            <%= el.label %>
+          </label>
+          <% if(!el.input){ %>
+            <textarea id="<%= el.name %>" class="form-control" name="<%= el.name %>"></textarea>
+            <% } else{ %>
+              <input type="<%= el.input %>" id="<%= el.name %>" class="form-control" name="<%= el.name %>">
+              <% }%>
+        </div>
+        <% }) %>
+          <button class="btn btn-primary" type="submit">Enviar</button>
     </form>
   </div>
 </body>
