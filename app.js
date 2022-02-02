@@ -6,8 +6,10 @@ const index = require("./routes/index");
 const formsRoutes = require("./routes/forms");
 const authRouter = require("./routes/auth");
 const morgan = require("morgan");
+const passport = require("passport");
 
 const app = express();
+require("./config/passport-config");
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -21,6 +23,9 @@ app.use(express.static("public"));
 app.use(morgan("dev"));
 
 app.use(express.json());
+
+app.use(passport.initialize());
+//app.use(passport.session())
 
 // Rutas de la aplicación
 app.use(index);

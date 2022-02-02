@@ -10,6 +10,6 @@ router.get("/register", authController.registerUser);
 router.get(GOOGLE_CALLBACK_URL, authController.googleUser);
 
 router.post("/login", authController.loginUser);
-router.post("/register", authController.registerUser);
+router.post("/register", authController.signUp);
 router.post(GOOGLE_CALLBACK_URL, authController.googleUser);
 module.exports = router;
