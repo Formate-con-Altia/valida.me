@@ -9,10 +9,24 @@
   background-color: var(--gris-oscuro);
 }
 
-.nav-color span {
-  background-color: var(--blanco);
+.nav-color {
+  color: var(--blanco);
 }
 
 .nav-color a {
   color: var(--blanco);
+  text-decoration: none;
+}
+
+.nav-background-color:hover {
+  background-color: var(--azul);
+}
+
+footer a {
+  color: var(--blanco);
+}
+
+footer {
+  color: var(--gris-claro);
+  background-color: var(--azul);
 }
