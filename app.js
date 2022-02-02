@@ -7,6 +7,7 @@ const formsRoutes = require("./routes/forms");
 const authRouter = require("./routes/auth");
 const morgan = require("morgan");
 const passport = require("passport");
+const session = require("express-session");
 
 const app = express();
 require("./config/passport-config");
@@ -24,8 +25,15 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(passport.initialize());
-//app.use(passport.session())
+app.use(passport.session());
 
 // Rutas de la aplicación
 app.use(index);
