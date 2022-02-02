@@ -3,7 +3,7 @@
 
 <head>
   <%- include('../partials/head.ejs') %>
-    <title>Drag & Drop</title>
+  <title>Drag & Drop</title>
 </head>
 
 <body>
@@ -11,112 +11,35 @@
     <div class="d-flex gap-3">
       <div id="drop-on-me-babe" class="col-8 border border-1 border-primary rounded p-3"></div>
       <div id="drag-from-me-babe" class="col border border-1 border-primary rounded p-3">
-        <div class="mb-3">
-          <label class="fw-bold form-label">Nombre</label>
+        <div class="mb-3" id="name" name="name">
+          <label class="fw-bold form-label" name="name">Nombre</label>
           <input type="text" name="name" class="form-control" />
         </div>
 
-        <div class="mb-3">
-          <label class="fw-bold form-label">Teléfono</label>
+        <div class="mb-3" id="tel" name="tel">
+          <label class="fw-bold form-label" name="tel">Teléfono</label>
           <input type="tel" name="tel" class="form-control" />
         </div>
 
-        <div class="mb-3">
-          <label class="fw-bold form-label">Email</label>
+        <div class="mb-3" id="email" name="email">
+          <label class="fw-bold form-label" name="email">Email</label>
           <input type="email" name="email" class="form-control" />
         </div>
       </div>
     </div>
 
     <div class="mt-3">
-      <h2 class="h2">Código generado:</h2>
-      <div id="html-form-code" class="form-control my-3 border border-1 border-primary rounded overflow-auto"
-        style="height: 350px"></div>
+      <div id="html-form-code" class="form-control my-3 border border-1 border-primary rounded overflow-auto" style="height: 350px; display: none;"></div>
     </div>
 
     <div id="alert-placeholder"></div>
 
-    <button class="btn btn-primary">Crear formulario</button>
+    <button id="boton-form" class="btn btn-primary disabled">Crear formulario</button>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script>
-    const dropZone = document.querySelector("#drop-on-me-babe"); // Contenedor que recibirá los elementos
-    const dragZone = document.querySelector("#drag-from-me-babe"); // Contenedor del que se arrastrarán los elementos
-    const htmlCode = document.querySelector("#html-form-code"); // Código HTML generado, lo guardaríamos en la base de datos
 
-    new Sortable(dropZone, {
-      group: "shared",
-      animation: 150, // Añadimos una pequeña animación cuando se ordenen los elementos
-      onChange() {
-        htmlCode.textContent = dropZone.innerHTML; // Si el contenido del contenedor cambia, actualizamos el código HTML
-      },
-    });
-
-    new Sortable(dragZone, {
-      group: {
-        name: "shared", // Debe tener el mismo nombre de grupo que los contenedores con los que queramos interactuar
-        pull: "clone", // Si arrastramos un elemento, debemos clonarlo en lugar de moverlo
-        put: false, // No queremos que se puedan arrastrar elementos a este contenedor
-      },
-      sort: false, // En este contenedor no queremos cambiar el orden de los elementos
-    });
-
-    // Evento para demostración, si hacemos doble click en un elemento, se borrará del DOM
-    dropZone.addEventListener("dblclick", (e) => {
-      if (e.target !== dropZone) {
-        // Si el target no es igual al propio contenedor...
-        if (e.target.children.length === 0) return;
-        // y si tiene hijos...
-        dropZone.removeChild(e.target); // borramos el elemento...
-        htmlCode.textContent = dropZone.innerHTML; // y actualizamos el código HTML
-      }
-    });
-
-    // Creamos una función que recibe una clase alert (success, info, error...) y un mensaje.
-    // Para más información sobre las clases alert visitar: https://getbootstrap.com/docs/5.1/components/alerts/
-    const createFeedbackMessage = (type, message) => {
-      const alertPlaceholder = document.querySelector("#alert-placeholder");
-      const wrapper = document.createElement("div");
-
-      wrapper.innerHTML =
-        '<div class="alert alert-' +
-        type +
-        ' alert-dismissible" role="alert">' +
-        message +
-        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-
-      alertPlaceholder.append(wrapper);
-    };
-
-    document.querySelector("button").addEventListener("click", async () => {
-      try {
-        const response = await fetch("/forms/create", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data: dropZone.innerHTML }),
-        });
-
-        if (!response.ok) {
-          const errorMessage =
-            "¡El formulario no se ha podido guardar! Prueba nuevamente en unos minutos.";
-
-          throw new Error(errorMessage);
-        }
-
-        const data = await response.json(); // Obtenemos los datos del servidor
-        const successMessage = `¡Formulario creado correctamente! Puedes visualizarlo en <a href="http://localhost:3000/forms/${data.id}" class="alert-link" target="_blank">http://localhost:3000/forms/${data.id}</a>.`;
-        // Si todo ha ido bien, confirmamos la creación del formulario
-        createFeedbackMessage("success", successMessage);
-      } catch (error) {
-        // Si algo ha fallado, enviamos feedback al usuario
-        createFeedbackMessage("danger", error);
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
