@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const index = require("./routes/index");
 const formsRoutes = require("./routes/forms");
-
+const authRouter = require("./routes/auth");
 const morgan = require("morgan");
 
 const app = express();
@@ -25,6 +25,7 @@ app.use(express.json());
 // Rutas de la aplicación
 app.use(index);
 app.use("/forms", formsRoutes);
+app.use(authRouter);
 
 app.use((req, res) => res.status(404).send("Recurso no encontrado"));
 
