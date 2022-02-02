@@ -24,9 +24,20 @@
 
 footer a {
   color: var(--blanco);
+  text-decoration: none;
 }
 
 footer {
   color: var(--gris-claro);
   background-color: var(--azul);
+}
+
+.imgBanner {
+  width: 100%;
+}
+
+.imgSection {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
 }
