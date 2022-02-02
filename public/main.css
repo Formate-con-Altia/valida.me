@@ -1,0 +1,18 @@
+:root {
+  --gris-claro: #d2d2d2;
+  --gris-oscuro: #394656;
+  --blanco: #ffffff;
+  --azul: #00afe3;
+}
+
+.background-color-header {
+  background-color: var(--gris-oscuro);
+}
+
+.nav-color span {
+  background-color: var(--blanco);
+}
+
+.nav-color a {
+  color: var(--blanco);
+}
