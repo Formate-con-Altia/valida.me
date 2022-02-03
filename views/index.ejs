@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valida.me</title>
-</head>
-<body>
-  <h1>Landing page</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valida.me</title>
+  </head>
+  <body>
+    <h1>Landing page</h1>
+
+    <div class="d-block">
+      <% if (!user) { %>
+      <a class="link-info" href="/login">Login</a>
+      <a class="link-info" href="/register">Register</a>
+      <% } else { %>
+      <a class="link-info" href="/logout">Logout</a>
+      <% } %>
+    </div>
+
+    <hr />
+
+    <% if (user) { %>
+    <h2 class="h2">Hola, <%= `${user.firstName} ${user.lastName}` %></h2>
+    <% } %>
+  </body>
 </html>
