@@ -22,6 +22,14 @@
   background-color: var(--azul);
 }
 
+.nav-login {
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  background: var(--blanco);
+  border-radius: 50px;
+}
+
 footer a {
   color: var(--blanco);
   text-decoration: none;
@@ -32,12 +40,37 @@ footer {
   background-color: var(--azul);
 }
 
-.imgBanner {
-  width: 100%;
+.textoBanner {
+  color: var(--blanco);
+  font-size: 50px;
+}
+
+.btn-crear {
+  background-color: var(--azul);
+  color: var(--gris-claro);
+  font-weight: 700;
+}
+
+.fondoImg {
+  background-color: var(--gris-oscuro);
 }
 
 .imgSection {
+  position: relative;
+  height: 200px;
+}
+
+.fondoImg {
+  position: absolute;
+  left: 25%;
+  height: 100%;
   width: 50%;
-  display: block;
-  margin: 0 auto;
+  border-radius: 100%;
+}
+.imgSection img {
+  position: absolute;
+  width: 20%;
+  height: 40%;
+  left: 40%;
+  top: 30%;
 }
