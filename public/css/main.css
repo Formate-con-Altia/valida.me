@@ -1,0 +1,97 @@
+:root {
+  --gris-claro: #d2d2d2;
+  --gris-oscuro: #394656;
+  --blanco: #ffffff;
+  --azul: #00afe3;
+}
+
+.background-color {
+  background-color: var(--gris-oscuro);
+}
+
+.texto-banner {
+  color: var(--blanco);
+  font-size: 5rem;
+  text-shadow: -3px 5px 10px black;
+}
+
+.nav-color {
+  color: var(--blanco);
+}
+
+.nav-color a {
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+.nav-background-color:hover {
+  background-color: var(--azul);
+  border-radius: 5px;
+}
+
+.nav-login {
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  background: var(--blanco);
+  border-radius: 50px;
+  margin-top: 0.4rem;
+}
+
+.title-team-color {
+  color: var(--azul);
+}
+
+.card {
+  align-items: center;
+  text-align: center;
+}
+
+.row a {
+  text-decoration: none;
+  color: var(--azul);
+}
+
+footer a {
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+footer {
+  color: var(--gris-claro);
+  background-color: var(--azul);
+}
+
+.btn-crear {
+  background-color: var(--azul);
+  color: var(--blanco);
+  font-weight: 700;
+}
+
+.barra-separacion {
+  background-color: var(--gris-claro);
+}
+
+.fondoImg {
+  background-color: var(--gris-oscuro);
+}
+
+.imgSection {
+  position: relative;
+  height: 200px;
+}
+
+.fondoImg {
+  position: absolute;
+  left: 25%;
+  height: 100%;
+  width: 50%;
+  border-radius: 100%;
+}
+.imgSection img {
+  position: absolute;
+  width: 20%;
+  height: 40%;
+  left: 40%;
+  top: 30%;
+}
