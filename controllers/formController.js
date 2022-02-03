@@ -1,4 +1,4 @@
-const Form = require("../models/forms");
+const { formSchema, responseSchema } = require("../models/forms");
 const mongoose = require("mongoose");
 const { parse } = require("node-html-parser");
 const { slugify } = require("../lib/helpers");
@@ -26,7 +26,7 @@ const createNewForm = async (req, res) => {
       };
     });
 
-  const form = await new Form({
+  const form = await new formSchema({
     fields: parsedInputs,
   }).save();
 

@@ -26,4 +26,3 @@ const formSchema = new Schema({
 
 exports.formSchema = model("form", formSchema);
 exports.responseSchema = model("responses", responseFormSchema);
-module.exports = model("form", formSchema);
