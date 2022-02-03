@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <%- include("../partials/head") %>
     <title>Document</title>
-</head>
-<body>
-    <form action="" method="POST">
-        <label for="email">Name1</label>
-        <input type="text" name="email" class="form-control">
-        <label for="password">Password2</label>
-        <input type="password" name="password" class="form-control">
-        <input type="submit">
-    </form>
-</body>
+  </head>
+  <body>
+    <main class="container mx-auto">
+      <form action="" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">Correo electrónico</label>
+          <input type="text" name="email" id="email" class="form-control" />
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="form-control"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Registrarse</button>
+      </form>
+    </main>
+  </body>
 </html>

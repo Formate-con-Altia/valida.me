@@ -1,15 +1,19 @@
 require("dotenv").config();
-const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL;
-const authController = require("../controllers/authController");
+
 const express = require("express");
+const authController = require("../controllers/authController");
+const { isAuthenticated } = require("../lib/auth");
 
 const router = express.Router();
 
-router.get("/login", authController.loginUser);
-router.get("/register", authController.registerUser);
+const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL;
+
+router.get("/login", isAuthenticated, authController.loginUser);
+router.get("/logout", authController.logoutUser);
+router.get("/register", isAuthenticated, authController.registerUser);
 router.get(GOOGLE_CALLBACK_URL, authController.googleUser);
 
-router.post("/login", authController.loginUser);
-router.post("/register", authController.signUp);
-router.post(GOOGLE_CALLBACK_URL, authController.googleUser);
+router.post("/login", isAuthenticated, authController.signIn);
+router.post("/register", isAuthenticated, authController.signUp);
+
 module.exports = router;
