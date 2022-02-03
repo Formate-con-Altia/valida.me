@@ -69,10 +69,10 @@ const createNewForm = async (req, res) => {
     // Enviar el nuevo id de respuesta al array de respuestas del formulario
     form.responses.push(formResponse._id)
     // Actualizar el documento de la base de datos
-    form.save();
+    await form.save();
     
      
-  res.status(201).send();
+  res.status(201).send("Respuestas guardadas correctamente");
 };
 
 
