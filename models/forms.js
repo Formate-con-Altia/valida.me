@@ -15,7 +15,7 @@ const valueNameSchema = new Schema({
 });
 
 const responseFormSchema = new Schema({
-  formId: Schema.Types.ObjectId,
+  idForm: Schema.Types.ObjectId,
   values: [valueNameSchema],
 });
 
@@ -24,5 +24,5 @@ const formSchema = new Schema({
   responses: [{ type: Schema.Types.ObjectId, ref: "responses" }],
 });
 
-exports.formSchema = model("form", formSchema);
-exports.responseSchema = model("responses", responseFormSchema);
+exports.Form = model("form", formSchema);
+exports.Response = model("responses", responseFormSchema);
