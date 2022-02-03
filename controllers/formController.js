@@ -34,7 +34,6 @@ const createNewForm = async (req, res) => {
     res.status(201).send({ id: form._id });
   };
   
-  //--------------------------------------------
   
   const createResponse = async (req, res) => {
     
@@ -65,54 +64,17 @@ const createNewForm = async (req, res) => {
       idForm: idForm
     }).save();
 
+    // Recuperar el formulario correspondiente al id del formulario
     const form = await Form.findOne({ _id: idForm });
-    console.log(form)
-
+    // Enviar el nuevo id de respuesta al array de respuestas del formulario
     form.responses.push(formResponse._id)
+    // Actualizar el documento de la base de datos
     form.save();
     
-    // en formREsponse._id teneis el identificador que se acaba de crear para este documento REsponse
-
-    // en 'form' teneos el documento Formulario identificado por idForm
-
-    // Teneis que añadir el formREsponse._id como nuevo elemento del array "responses" del "form" y salvarlo.
-
-    //console.log(formResponse)
      
   res.status(201).send();
 };
 
-
-// Recuperar de la base de datos el documento formSchema identificado con idForm
-
-  // añadir el ObjectID al array de respuesta del documento From (campo responses)
-
-  // .save del Form
-
-  // // Obtenemos el texto de todos los labels
-  // const parsedLabels = parsedHtml
-  //   .querySelectorAll("label")
-  //   .map((elm) => elm.innerText);
-
-  // // Obtenemos los inputs y devolvemos un array de objetos con los atributos necesarios
-  // const parsedValues = parsedHtml
-  //   .querySelectorAll("input, textarea")
-  //   .map((elm, i) => {
-  //     return {
-  //       name: `${slugify(parsedLabels[i])}[${i}]`,
-  //       input: elm.attrs.type,
-  //       label: parsedLabels[i],
-  //       value: elm.attrs.value
-  //     };
-  //   });
-
-  // const form = await new Form({
-  //   response: parsedValues,
-  // }).save();
-
-  // console.log(parsedValues);
-
-//------------------------------------------------
 
 const getCreatedForm = async (req, res) => {
   const { id } = req.params;
