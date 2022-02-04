@@ -7,6 +7,9 @@
 </head>
 
 <body>
+
+  <%- include('../partials/header.ejs') %>
+
   <div class="container mx-auto my-4">
     <form action="" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
       <% form.fields.forEach(el=> { %>
@@ -24,6 +27,35 @@
           <button class="btn btn-primary" type="submit">Enviar</button>
     </form>
   </div>
+
+  <!--
+    <div class="container mx-auto my-4">
+
+      <div class="my-5">
+        <h1 class="d-flex justify-content-center">RELLENAR FORMULARIO</h1>
+      </div>
+
+      <form action="" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+        <div class="card w-100">
+          <div class="card-body w-75">
+            
+            <div class="my-3">
+              <input type="text" class="form-control sombreado-campos" placeholder="Nombre:" />
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-center my-3">
+          <button id="boton-form" class="btn btn-primary">Enviar</button>
+        </div>
+      </form>
+      
+    </div>
+  -->
+
+  <%- include('../partials/footer.ejs') %>
+
 </body>
 
 </html>
