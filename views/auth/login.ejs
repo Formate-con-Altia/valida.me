@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="container mx-auto">
+      <h1 class="h1">Login</h1>
+
+      <!-- Comprobación de los errores devueltos por el formulario -->
+      <% if (typeof errors !== 'undefined') { %>
+      <div class="alert alert-danger p-3 my-3">
+        <% errors.forEach(error => { %>
+        <p class="m-0"><%= error.msg %></p>
+        <% }) %>
+      </div>
+      <% } %>
+
+      <!-- Comprobación de los errores devueltos por passport -->
+      <% if (error.length > 0) { %>
+      <div class="alert alert-danger p-3 my-3">
+        <p class="m-0"><%= error %></p>
+      </div>
+      <% } %>
+
+      <form action="" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-bold text-muted"
+            >Correo electrónico</label
+          >
+          <input type="text" name="email" id="email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label fw-bold text-muted"
+            >Contraseña</label
+          >
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-primary" type="submit">Ingresar</button>
+        </div>
+      </form>
+
+      <form class="text-center" action="/auth/google" method="get">
+        <button class="btn btn-primary btn-block my-2" type="submit">
+          Ingresar con Google
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
