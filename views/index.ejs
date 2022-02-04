@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valida.me</title>
-</head>
-<body>
-  <h1>Landing page</h1>
-</body>
+  <head>
+    <%- include('partials/head') %>
+    <title>Valida.me</title>
+  </head>
+  <body>
+    <div class="m-3">
+      <h1>Landing page</h1>
+
+      <% if (!user) { %>
+      <a class="link-primary" href="/login">Login</a>
+      <a class="link-primary" href="/register">Register</a>
+      <% } else { %>
+      <a class="link-primary" href="/logout">Logout</a>
+      <% } %>
+    </div>
+
+    <main class="container mx-auto my-2">
+      <% if (user) { %>
+      <div class="">
+        <img
+          src="<%= user.profilePhoto %>"
+          alt=""
+          referrerpolicy="no-referrer"
+          class="rounded-circle"
+        />
+        <h2 class="h2">Hola, <%= `${user.firstName} ${user.lastName}` %></h2>
+        <h3 class="h3">Correo electrónico: <%= user.email %></h3>
+      </div>
+      <% } %>
+    </main>
+  </body>
 </html>
