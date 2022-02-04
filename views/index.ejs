@@ -19,7 +19,12 @@
     <main class="container mx-auto my-2">
       <% if (user) { %>
       <div class="">
-        <img src="<%= user.profilePhoto %>" alt="" class="rounded-circle" />
+        <img
+          src="<%= user.profilePhoto %>"
+          alt=""
+          referrerpolicy="no-referrer"
+          class="rounded-circle"
+        />
         <h2 class="h2">Hola, <%= `${user.firstName} ${user.lastName}` %></h2>
         <h3 class="h3">Correo electrónico: <%= user.email %></h3>
       </div>
