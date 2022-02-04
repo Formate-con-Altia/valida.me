@@ -11,19 +11,36 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
-    async (accessToken, refreshToken, profile, cb) => {
-      //({ googleId: profile.id });
-      const emailFound = await User.findOne({ email });
+    async (accessToken, refreshToken, profile, done) => {
+      const id = profile.id;
+      const email = profile.emails[0].value;
+      const firstName = profile.name.givenName;
+      const lastName = profile.name.familyName;
+      const profilePhoto = profile.photos[0].value;
 
-      if (emailFound) return done(null, false);
+      const currentUser = await User.findOne({ email });
 
-      const newUser = await new User({
-        email,
-        password,
-        source: "google",
-      }).save();
+      // Creamos un nuevo usuario
+      if (!currentUser) {
+        const newUser = await new User({
+          id,
+          email,
+          firstName,
+          lastName,
+          profilePhoto,
+          source: "google",
+        }).save();
 
-      return done(null, newUser);
+        return done(null, newUser);
+      }
+
+      // El usuario ha sido registrado utilizando otro método de autenticación
+      if (currentUser.source !== "google") {
+        return done(null, false, { message: "Tu cuenta ya está registrada." });
+      }
+
+      // Devolvemos el usuario existente
+      return done(null, currentUser);
     }
   )
 );

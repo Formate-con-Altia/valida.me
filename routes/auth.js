@@ -11,8 +11,13 @@ const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL;
 
 router.get("/login", isAuthenticated, authController.loginUser);
 router.get("/logout", authController.logoutUser);
-router.get("/register", isAuthenticated, authController.registerUser);
-router.get(GOOGLE_CALLBACK_URL, authController.googleUser);
+router.get("/register", authController.registerUser);
+router.get("/auth/google", isAuthenticated, authController.googleUser);
+router.get(
+  GOOGLE_CALLBACK_URL,
+  isAuthenticated,
+  authController.googleUserCallback
+);
 
 router.post(
   "/login",

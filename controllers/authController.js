@@ -16,9 +16,17 @@ exports.logoutUser = (req, res) => {
   });
 };
 
-exports.googleUser = (req, res) => {};
+exports.googleUser = passport.authenticate("google", {
+  scope: ["email", "profile"],
+});
 
-exports.signUp = async (req, res) => {
+exports.googleUserCallback = passport.authenticate("google", {
+  failureRedirect: "/login",
+  successRedirect: "/",
+  failureFlash: true,
+});
+
+exports.signUp = async (req, res, next) => {
   const validationResults = validationResult(req);
 
   if (!validationResults.isEmpty()) {
@@ -31,10 +39,10 @@ exports.signUp = async (req, res) => {
     failureRedirect: "/register", // Si falla el registro, redirigir...
     successRedirect: "/", // Si NO falla el registro, redirigir...
     failureFlash: true, // Permite mostrar el mensaje de error definidos en la estrategia
-  })(req, res);
+  })(req, res, next);
 };
 
-exports.signIn = async (req, res) => {
+exports.signIn = async (req, res, next) => {
   const validationResults = validationResult(req);
 
   if (!validationResults.isEmpty()) {
@@ -47,5 +55,5 @@ exports.signIn = async (req, res) => {
     failureRedirect: "/login",
     successRedirect: "/",
     failureFlash: true,
-  })(req, res);
+  })(req, res, next);
 };

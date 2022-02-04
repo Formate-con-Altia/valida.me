@@ -54,7 +54,7 @@ passport.use(
       if (currentUser.source !== "local") {
         return done(null, false, {
           message:
-            "La cuenta con la que intentas acceder ya ha sido registrada utilizando Google.",
+            "La cuenta con la que intentas acceder ya ha sido registrada con Google.",
         });
       }
 
