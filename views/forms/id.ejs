@@ -9,6 +9,7 @@
 <body>
   <div class="container mx-auto my-4">
     <form action="/forms/formResponse" method="post" class="needs-validation" novalidate>
+      <h1><%= form.title %></h1>
       <% form.fields.forEach(el=> { %>
         <div class="mb-3">
           <label for="<%= el.name %>" class="fw-bold form-label">

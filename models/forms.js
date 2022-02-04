@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const fieldSchema = new Schema({
   input: {
     type: String,
-    enum: ["tel", "text", "email", "file", "textarea"],
+    enum: ["tel", "text", "email", "file", "textarea", "hidden"],
   },
   name: String,
   label: String,
@@ -20,6 +20,8 @@ const responseFormSchema = new Schema({
 });
 
 const formSchema = new Schema({
+  userId: Schema.Types.ObjectId,
+  title: String,
   fields: [fieldSchema],
   responses: [{ type: Schema.Types.ObjectId, ref: "responses" }],
 });
