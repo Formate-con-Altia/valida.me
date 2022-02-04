@@ -12,7 +12,7 @@ passport.use(
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
-      const id = profile.id;
+      const googleId = profile.id;
       const email = profile.emails[0].value;
       const firstName = profile.name.givenName;
       const lastName = profile.name.familyName;
@@ -23,7 +23,7 @@ passport.use(
       // Creamos un nuevo usuario
       if (!currentUser) {
         const newUser = await new User({
-          id,
+          googleId,
           email,
           firstName,
           lastName,
