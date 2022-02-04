@@ -4,6 +4,25 @@ const { parse } = require("node-html-parser");
 const { slugify } = require("../lib/helpers");
 const { response } = require("express");
 
+const showForms = async (req,res) => {
+  let forms = await Form.find({userId: req.user._id})
+  console.log(forms)
+  res.render("forms/list",{forms})
+};
+
+const showResponses = async (req,res) => {
+  let responses = await Response.find({idForm: req.params.id})
+  console.log(responses)
+  res.json(responses)
+  //61fd0b803e85bd6387d0829a
+};
+
+const getResponses = async (req,res) => {
+  let id = req.params.id
+  let numberResponses = await Response.find({idForm: id}).count();
+  res.render("forms/responses", {id,numberResponses})
+};
+
 const createForm = (req, res) => {
   res.render("forms/index");
 };
@@ -29,8 +48,9 @@ const createNewForm = async (req, res) => {
     
     const form = await new Form({
       fields: parsedInputs,
+      userId: req.user._id
     }).save();
-    
+
     res.status(201).send({ id: form._id });
   };
   
@@ -95,5 +115,4 @@ const getCreatedForm = async (req, res) => {
   //   }
 };
 
-module.exports = { createForm, createNewForm, createResponse, getCreatedForm };
-
+module.exports = { createForm, createNewForm, createResponse, getCreatedForm, showForms, showResponses, getResponses};

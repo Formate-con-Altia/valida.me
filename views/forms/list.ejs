@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include('../partials/head.ejs') %>
+ <title>Document</title>
+</head>
+<body>
+  <% forms.forEach(form => { %>
+    <p><a href="http://localhost:3000/forms/responses/<%= form._id %>"><%= form._id %></a></p>
+  <% }) %>
+</body>
+</html>
