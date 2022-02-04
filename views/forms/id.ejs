@@ -9,50 +9,39 @@
 <body>
 
   <%- include('../partials/header.ejs') %>
+  
+  <div class="container mx-auto my-4" style="padding: 0 10%;">
 
-  <div class="container mx-auto my-4">
+    <div class="my-5">
+      <h1 class="d-flex justify-content-center">RELLENAR FORMULARIO</h1>
+    </div>
+
     <form action="" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
-      <% form.fields.forEach(el=> { %>
-        <div class="mb-3">
-          <label for="<%= el.name %>" class="fw-bold form-label">
-            <%= el.label %>
-          </label>
-          <% if(!el.input){ %>
-            <textarea id="<%= el.name %>" class="form-control" name="<%= el.name %>"></textarea>
+      
+      <div class="card w-100">
+        <div class="card-body w-75">
+
+          <% form.fields.forEach(el=> { %>
+
+            <% if(!el.input){ %>
+              <textarea id="<%= el.name %>" class="form-control sombreado-campos my-4" name="<%= el.name %>" placeholder="<%= el.label %>:"></textarea>
             <% } else{ %>
-              <input type="<%= el.input %>" id="<%= el.name %>" class="form-control" name="<%= el.name %>">
-              <% }%>
+              <input type="<%= el.input %>" id="<%= el.name %>" class="form-control sombreado-campos my-4" name="<%= el.name %>" placeholder="<%= el.label %>:">
+            <% }%>
+
+          <% }) %>
+
         </div>
-        <% }) %>
-          <button class="btn btn-primary" type="submit">Enviar</button>
-    </form>
-  </div>
-
-  <!--
-    <div class="container mx-auto my-4">
-
-      <div class="my-5">
-        <h1 class="d-flex justify-content-center">RELLENAR FORMULARIO</h1>
       </div>
 
-      <form action="" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
-        <div class="card w-100">
-          <div class="card-body w-75">
-            
-            <div class="my-3">
-              <input type="text" class="form-control sombreado-campos" placeholder="Nombre:" />
-            </div>
+      <div class="d-flex justify-content-center my-3">
+        <button id="boton-form" class="btn btn-primary">Enviar</button>
+      </div>
 
-          </div>
-        </div>
-        
-        <div class="d-flex justify-content-center my-3">
-          <button id="boton-form" class="btn btn-primary">Enviar</button>
-        </div>
-      </form>
-      
-    </div>
-  -->
+    </form>
+    
+  </div>
+  
 
   <%- include('../partials/footer.ejs') %>
 

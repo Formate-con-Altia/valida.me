@@ -38,7 +38,6 @@
 
 .texto-banner {
   color: var(--blanco);
-  font-size: 5rem;
   text-shadow: -3px 5px 10px black;
 }
 
@@ -108,6 +107,7 @@ footer a {
 .color-fondo-drop {
   background-color: var(--azul-crear);
 }
+
 .color-fondo-drag {
   background-color: var(--gris-crear);
 }
