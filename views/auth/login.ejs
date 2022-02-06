@@ -2,11 +2,13 @@
 <html lang="en">
   <head>
     <%- include("../partials/head") %>
-    <title>Document</title>
   </head>
+
   <body>
-    <main class="container mx-auto">
-      <h1 class="h1">Login</h1>
+    <%- include("../partials/header") %>
+
+    <main class="container mx-auto w-25 main">
+      <h1 class="h1 my-4">Iniciar sesión</h1>
 
       <!-- Comprobación de los errores devueltos por el formulario -->
       <% if (typeof errors !== 'undefined') { %>
@@ -50,10 +52,12 @@
       </form>
 
       <form class="text-center" action="/auth/google" method="get">
-        <button class="btn btn-primary btn-block my-2" type="submit">
-          Ingresar con Google
+        <button class="login-with-google-btn mt-4" type="submit">
+          Iniciar sesión con Google
         </button>
       </form>
     </main>
+
+    <%- include('../partials/footer.ejs') %>
   </body>
 </html>

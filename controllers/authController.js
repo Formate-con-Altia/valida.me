@@ -31,7 +31,9 @@ exports.signUp = async (req, res, next) => {
 
   if (!validationResults.isEmpty()) {
     req.flash("error", validationResults.array());
-    res.render("auth/register", { errors: req.flash("error") });
+    res.render("auth/register", {
+      errors: req.flash("error"),
+    });
     return;
   }
 

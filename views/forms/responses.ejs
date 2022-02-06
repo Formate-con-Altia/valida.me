@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <%- include('../partials/head.ejs') %>
-    <title>Document</title>
 
     <link
       rel="stylesheet"
@@ -25,7 +24,9 @@
   </head>
 
   <body>
-    <main class="container mx-auto my-2">
+    <%- include('../partials/header.ejs') %>
+
+    <main class="container mx-auto my-2 main">
       <section class="p-4">
         <table
           id="table"
@@ -54,6 +55,8 @@
         </table>
       </section>
     </main>
+
+    <%- include('../partials/footer.ejs') %>
 
     <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>

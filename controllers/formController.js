@@ -115,7 +115,9 @@ const createResponse = async (req, res) => {
   // Actualizar el documento de la base de datos
   await form.save();
 
-  res.status(201).send("Respuestas guardadas correctamente");
+  req.flash("success", "Respuestas guardadas correctamente");
+
+  res.status(201).redirect("/");
 };
 
 const getCreatedForm = async (req, res) => {

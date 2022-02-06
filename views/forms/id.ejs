@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
 
-<head>
-  <%- include('../partials/head.ejs') %>
-    <title>Formulario de Altia</title>
-</head>
+  <body>
+    <%- include('../partials/header.ejs') %>
 
-<body>
+    <main class="container mx-auto my-4 main" style="padding: 0 10%">
+      <div class="my-5">
+        <h1 class="d-flex justify-content-center"><%= form.title %></h1>
+      </div>
 
-  <%- include('../partials/header.ejs') %>
-  
-  <div class="container mx-auto my-4" style="padding: 0 10%;">
-
-    <div class="my-5">
-      <h1 class="d-flex justify-content-center"><%= form.title %></h1>
-    </div>
-
-    <form action="/forms/formResponse" method="post" class="needs-validation" novalidate>
-      
-      <div class="card w-100">
-        <div class="card-body w-75">
-          <% form.fields.forEach(el=> { %>
-
-            <% if(!el.input){ %>
-              <textarea id="<%= el.name %>" class="form-control sombreado-campos my-4" name="<%= el.name %>" placeholder="<%= el.label %>:"></textarea>
+      <form action="/forms/formResponse" method="post">
+        <div class="card w-100">
+          <div class="card-body w-75">
+            <% form.fields.forEach(el=> { %> <% if(!el.input){ %>
+            <textarea
+              id="<%= el.name %>"
+              class="form-control sombreado-campos my-4"
+              name="<%= el.name %>"
+              placeholder="<%= el.label %>"
+              minlength="3"
+              maxlength="250"
+              required
+            ></textarea>
             <% } else{ %>
-              <input type="<%= el.input %>" id="<%= el.name %>" class="form-control sombreado-campos my-4" name="<%= el.name %>" placeholder="<%= el.label %>:">
-            <% }%>
-
-          <% }) %>
-
+            <input
+              type="<%= el.input %>"
+              id="<%= el.name %>"
+              class="form-control sombreado-campos my-4"
+              name="<%= el.name %>"
+              placeholder="<%= el.label %>"
+              minlength="3"
+              maxlength="100"
+              required
+            />
+            <% }%> <% }) %>
+          </div>
         </div>
-      </div>
 
-      <div class="d-flex justify-content-center my-3">
-        <input type="hidden" name="idForm" value="<%= form._id %>">
-        <button type="submit" id="boton-form" class="btn btn-primary">Enviar</button>
-      </div>
+        <div class="d-flex justify-content-center my-3">
+          <input type="hidden" name="idForm" value="<%= form._id %>" />
+          <button type="submit" id="boton-form" class="btn btn-primary">
+            Enviar
+          </button>
+        </div>
+      </form>
+    </main>
 
-    </form>
-    
-  </div>
-  
-
-  <%- include('../partials/footer.ejs') %>
-
-</body>
-
+    <%- include('../partials/footer.ejs') %>
+  </body>
 </html>
