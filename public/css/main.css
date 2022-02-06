@@ -1,0 +1,125 @@
+:root {
+  --gris-claro: #d2d2d2;
+  --gris-oscuro: #394656;
+  --blanco: #ffffff;
+  --azul: #00afe3;
+  --azul-crear: #00afe340;
+  --gris-crear: #39465640;
+}
+
+/* Landing Page */
+
+.background-color {
+  background-color: var(--gris-oscuro);
+}
+
+.nav-color {
+  color: var(--blanco);
+}
+
+.nav-color a {
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+.nav-background-color:hover {
+  background-color: var(--azul);
+  border-radius: 5px;
+}
+
+.nav-login {
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  background: var(--blanco);
+  border-radius: 50px;
+  margin-top: 0.4rem;
+}
+
+.texto-banner {
+  color: var(--blanco);
+  text-shadow: -3px 5px 10px black;
+}
+
+.row a {
+  text-decoration: none;
+  color: var(--azul);
+}
+
+.btn-crear {
+  background-color: var(--azul);
+  color: var(--blanco);
+  font-weight: 700;
+}
+
+.barra-separacion {
+  background-color: var(--gris-claro);
+}
+
+.fondoImg {
+  background-color: var(--gris-oscuro);
+  position: absolute;
+  left: 25%;
+  height: 100%;
+  width: 50%;
+  border-radius: 100%;
+}
+
+.imgSection {
+  position: relative;
+  height: 200px;
+}
+
+.imgSection img {
+  position: absolute;
+  width: 20%;
+  height: 40%;
+  left: 40%;
+  top: 30%;
+}
+
+.title-team-color {
+  color: var(--azul);
+}
+
+.card {
+  align-items: center;
+  text-align: center;
+}
+
+footer {
+  color: var(--gris-claro);
+  background-color: var(--azul);
+}
+
+footer a {
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+/* Crear Formulario */
+
+.modificar-h2 {
+  color: var(--gris-oscuro);
+  font-size: 1.5rem;
+}
+
+.color-fondo-drop {
+  background-color: var(--azul-crear);
+}
+
+.color-fondo-drag {
+  background-color: var(--gris-crear);
+}
+
+.sombreado-campos {
+  box-shadow: 0 8px 4px rgba(79, 79, 79, 0.25);
+}
+
+#boton-form {
+  background-color: #00afe3;
+  box-shadow: 0px 8px 4px #1696bf;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.5rem;
+}
