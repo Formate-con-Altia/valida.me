@@ -1,48 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <%- include('../partials/head.ejs') %>
- <title>Document</title>
-</head>
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <title>Document</title>
 
-<body>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/jquery-resizable-columns@latest/dist/jquery.resizableColumns.css"
+    />
 
-  <table id="table" data-toggle="table" data-show-export="true"
-    data-url="http://localhost:3000/forms/responses/<%= id %>/data">
-    <thead>
-      <tr>
-       
-       <th data-field="values" data-formatter="responseFormatter">valor</th>
-      
-       <th data-field="_id" data-formatter="responseFormatter">ID</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
-  <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
-  <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
-  <script>
-   function responseFormatter(value,row){
-    console.dir(value[1].value)
-    let result = [];
-    for( let i = 0; i<=value.length;i++){
-      result.push(value[i]?.value)
-    }
-    return result
-   }
-  </script>
-</body>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="container mx-auto my-2">
+      <section class="p-4">
+        <table
+          id="table"
+          data-page-size="15"
+          data-pagination="true"
+          data-resizable="true"
+          data-search="true"
+          data-show-columns="true"
+          data-show-export="true"
+          data-show-fullscreen="true"
+          data-show-pagination-switch="true"
+          data-show-toggle="true"
+          data-sticky-header="true"
+          data-url="<%= path %>/json"
+        >
+          <thead>
+            <tr>
+              <% form.forEach((f) => { %>
+              <th
+                data-label="<%= f.fields.label %>"
+                data-formatter="responseFormatter"
+              ></th>
+              <% }) %>
+            </tr>
+          </thead>
+        </table>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin@1.21.0/tableExport.min.js"></script>
+    <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/locale/bootstrap-table-es-ES.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+    <script>
+      $(function () {
+        const url = $("#table").data("url");
+
+        function initTable(columns) {
+          $("#table").bootstrapTable({
+            toggle: "table",
+            locale: "es-ES",
+            pagination: true,
+            pageList: "[15, 25, 50, 100, all]",
+            sidePagination: "client",
+            columns,
+            url,
+            search: true,
+            showRefresh: true,
+            showExport: true,
+          });
+        }
+
+        $(document).ready(function () {
+          $.ajax({
+            method: "GET",
+            url,
+            dataType: "json",
+          }).done(function (data) {
+            let columns = [];
+
+            $.each(data[0], function (key, row) {
+              columns.push({
+                field: key,
+                title: document.querySelectorAll("th")[key].dataset["label"],
+                sortable: true,
+              });
+            });
+            initTable(columns);
+          });
+        });
+      });
+
+      function responseFormatter(response) {
+        return response.values.value;
+      }
+    </script>
+  </body>
 </html>

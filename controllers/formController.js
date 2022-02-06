@@ -1,26 +1,49 @@
 const { Form, Response } = require("../models/forms");
-const mongoose = require("mongoose");
+const { Types } = require("mongoose");
 const { parse } = require("node-html-parser");
 const { slugify } = require("../lib/helpers");
-const { response } = require("express");
 
-const showForms = async (req,res) => {
-  let forms = await Form.find({userId: req.user._id})
-  console.log(forms)
-  res.render("forms/list",{forms})
+const showForms = async (req, res) => {
+  let forms = await Form.find({ userId: req.user._id });
+
+  res.render("forms/list", { forms });
 };
 
-const showResponses = async (req,res) => {
-  let responses = await Response.find({idForm: req.params.id})
-  console.log(responses)
-  res.json(responses)
-  //61fd0b803e85bd6387d0829a
+const showResponses = async (req, res) => {
+  const id = Types.ObjectId(req.params.id);
+
+  const values = await Response.aggregate()
+    .match({ idForm: id })
+    .project({ "values.value": 1, _id: 0 })
+    .unwind("values");
+
+  const count = await Form.aggregate()
+    .match({ _id: id })
+    .project({ fields: 1, _id: 0 })
+    .unwind("fields")
+    .count("fields");
+
+  let results = [];
+
+  for (let i = 0; i < values.length; i += count[0].fields) {
+    results.push(values.slice(i, i + count[0].fields));
+  }
+
+  res.json(results);
 };
 
-const getResponses = async (req,res) => {
-  let id = req.params.id
-  let numberResponses = await Response.find({idForm: id}).count();
-  res.render("forms/responses", {id,numberResponses})
+const getResponses = async (req, res) => {
+  const id = Types.ObjectId(req.params.id);
+
+  const form = await Form.aggregate()
+    .match({ _id: id })
+    .project({ "fields.label": 1, _id: 0 })
+    .unwind("fields");
+
+  res.render("forms/responses", {
+    path: req.protocol + "://" + req.get("host") + req.originalUrl,
+    form,
+  });
 };
 
 const createForm = (req, res) => {
@@ -45,61 +68,57 @@ const createNewForm = async (req, res) => {
         label: parsedLabels[i],
       };
     });
-    
-    const form = await new Form({
-      fields: parsedInputs,
-      userId: req.user._id
-    }).save();
 
-    res.status(201).send({ id: form._id });
-  };
-  
-  
-  const createResponse = async (req, res) => {
-    
-    let datos = req.body
-    var keys = Object.keys(datos);
-    let nameValues = [];
-    let idForm = req.body.idForm;
-    
-    // recorrer req.body, y teneis que crear un array de objetos del estilo
-    // [{name: "name[0]", value:"Adrian"}, {{name: "telefono[1]", value:"123456"}}]          
-    
-    for (var i = 0; i < keys.length-1; i++) {
-      var val = datos[keys[i]];
-      var key = keys[i]
-     
-      nameValues.push({
-        name: key,
-        value: val
-      });
-    }
-    
-    // Crer un documento del tipo responseFormSchema, donde su formId es justament
-    // el campo req.body.idForm y el campo "values" del documento es la lista de
-    // documentos del tipo valueNameSchema previamente creados                              
-    
-    const formResponse = await new Response({
-      values: nameValues,
-      idForm: idForm
-    }).save();
+  const form = await new Form({
+    fields: parsedInputs,
+    userId: req.user._id,
+  }).save();
 
-    // Recuperar el formulario correspondiente al id del formulario
-    const form = await Form.findOne({ _id: idForm });
-    // Enviar el nuevo id de respuesta al array de respuestas del formulario
-    form.responses.push(formResponse._id)
-    // Actualizar el documento de la base de datos
-    await form.save();
-    
-     
-  res.status(201).send("Respuestas guardadas correctamente");
+  res.status(201).send({ id: form._id });
 };
 
+const createResponse = async (req, res) => {
+  let datos = req.body;
+  var keys = Object.keys(datos);
+  let nameValues = [];
+  let idForm = req.body.idForm;
+
+  // recorrer req.body, y teneis que crear un array de objetos del estilo
+  // [{name: "name[0]", value:"Adrian"}, {{name: "telefono[1]", value:"123456"}}]
+
+  for (var i = 0; i < keys.length - 1; i++) {
+    var val = datos[keys[i]];
+    var key = keys[i];
+
+    nameValues.push({
+      name: key,
+      value: val,
+    });
+  }
+
+  // Crer un documento del tipo responseFormSchema, donde su formId es justament
+  // el campo req.body.idForm y el campo "values" del documento es la lista de
+  // documentos del tipo valueNameSchema previamente creados
+
+  const formResponse = await new Response({
+    values: nameValues,
+    idForm: idForm,
+  }).save();
+
+  // Recuperar el formulario correspondiente al id del formulario
+  const form = await Form.findOne({ _id: idForm });
+  // Enviar el nuevo id de respuesta al array de respuestas del formulario
+  form.responses.push(formResponse._id);
+  // Actualizar el documento de la base de datos
+  await form.save();
+
+  res.status(201).send("Respuestas guardadas correctamente");
+};
 
 const getCreatedForm = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id))
+  if (!Types.ObjectId.isValid(id))
     return res.status(404).send("Recurso no encontrado");
 
   const form = await Form.findOne({ _id: id });
@@ -115,4 +134,12 @@ const getCreatedForm = async (req, res) => {
   //   }
 };
 
-module.exports = { createForm, createNewForm, createResponse, getCreatedForm, showForms, showResponses, getResponses};
+module.exports = {
+  createForm,
+  createNewForm,
+  createResponse,
+  getCreatedForm,
+  showForms,
+  showResponses,
+  getResponses,
+};
