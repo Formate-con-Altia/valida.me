@@ -13,14 +13,13 @@
   <div class="container mx-auto my-4" style="padding: 0 10%;">
 
     <div class="my-5">
-      <h1 class="d-flex justify-content-center">RELLENAR FORMULARIO</h1>
+      <h1 class="d-flex justify-content-center"><%= form.title %></h1>
     </div>
 
     <form action="/forms/formResponse" method="post" class="needs-validation" novalidate>
       
       <div class="card w-100">
         <div class="card-body w-75">
-
           <% form.fields.forEach(el=> { %>
 
             <% if(!el.input){ %>

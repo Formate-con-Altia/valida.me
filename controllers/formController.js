@@ -5,6 +5,9 @@ const { slugify } = require("../lib/helpers");
 const { response } = require("express");
 
 const createForm = (req, res) => {
+  if (!req.user || !req.user._id) {
+    return res.redirect("/");
+  }
   res.render("forms/index");
 };
 
@@ -13,9 +16,8 @@ const createNewForm = async (req, res) => {
 
   // Obtenemos el texto de todos los labels
   const parsedLabels = parsedHtml
-    .querySelectorAll("label")
-    .map((elm) => elm.innerText);
-
+    .querySelectorAll("input, textarea")
+    .map((elm) => elm.attrs.placeholder);
   // Obtenemos los inputs y devolvemos un array de objetos con los atributos necesarios
   const parsedInputs = parsedHtml
     .querySelectorAll("input, textarea")
@@ -28,6 +30,8 @@ const createNewForm = async (req, res) => {
     });
 
   const form = await new Form({
+    userId: req.user._id,
+    title: req.body.formTitle,
     fields: parsedInputs,
   }).save();
 
