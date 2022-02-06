@@ -1,8 +1,50 @@
 const { Form, Response } = require("../models/forms");
-const mongoose = require("mongoose");
+const { Types } = require("mongoose");
 const { parse } = require("node-html-parser");
 const { slugify } = require("../lib/helpers");
-const { response } = require("express");
+
+const showForms = async (req, res) => {
+  let forms = await Form.find({ userId: req.user._id });
+
+  res.render("forms/list", { forms });
+};
+
+const showResponses = async (req, res) => {
+  const id = Types.ObjectId(req.params.id);
+
+  const values = await Response.aggregate()
+    .match({ idForm: id })
+    .project({ "values.value": 1, _id: 0 })
+    .unwind("values");
+
+  const count = await Form.aggregate()
+    .match({ _id: id })
+    .project({ fields: 1, _id: 0 })
+    .unwind("fields")
+    .count("fields");
+
+  let results = [];
+
+  for (let i = 0; i < values.length; i += count[0].fields) {
+    results.push(values.slice(i, i + count[0].fields));
+  }
+
+  res.json(results);
+};
+
+const getResponses = async (req, res) => {
+  const id = Types.ObjectId(req.params.id);
+
+  const form = await Form.aggregate()
+    .match({ _id: id })
+    .project({ "fields.label": 1, _id: 0 })
+    .unwind("fields");
+
+  res.render("forms/responses", {
+    path: req.protocol + "://" + req.get("host") + req.originalUrl,
+    form,
+  });
+};
 
 const createForm = (req, res) => {
   if (!req.user || !req.user._id) {
@@ -79,7 +121,7 @@ const createResponse = async (req, res) => {
 const getCreatedForm = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id))
+  if (!Types.ObjectId.isValid(id))
     return res.status(404).send("Recurso no encontrado");
 
   const form = await Form.findOne({ _id: id });
@@ -95,4 +137,12 @@ const getCreatedForm = async (req, res) => {
   //   }
 };
 
-module.exports = { createForm, createNewForm, createResponse, getCreatedForm };
+module.exports = {
+  createForm,
+  createNewForm,
+  createResponse,
+  getCreatedForm,
+  showForms,
+  showResponses,
+  getResponses,
+};

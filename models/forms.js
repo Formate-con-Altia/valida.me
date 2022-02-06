@@ -23,7 +23,16 @@ const formSchema = new Schema({
   userId: Schema.Types.ObjectId,
   title: String,
   fields: [fieldSchema],
-  responses: [{ type: Schema.Types.ObjectId, ref: "responses" }],
+  responses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "responses",
+    },
+  ],
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
 exports.Form = model("form", formSchema);
