@@ -1,38 +1,323 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="position-relative">
   <head>
-    <%- include('partials/head') %>
+    <%- include('partials/head.ejs') %>
     <title>Valida.me</title>
   </head>
-  <body>
-    <div class="m-3">
-      <h1>Landing page</h1>
 
-      <% if (!user) { %>
-      <a class="link-primary" href="/login">Login</a>
-      <a class="link-primary" href="/register">Register</a>
-      <% } else { %>
-      <a class="link-primary" href="/logout">Logout</a>
-      <hr />
-      <a class="link-primary" href="/forms/list">forms/list</a>
-      <hr />
-      <a class="link-primary" href="/forms">forms</a>
-      <% } %>
+  <body>
+    <%- include('partials/header.ejs') %>
+
+    <!-- BANNER -->
+    <section>
+      <div class="position-relative opacity-75">
+        <img
+          class="img-fluid"
+          src="img/fondo-banner.jpg"
+          alt="Manos tecleando"
+          style="height: 40rem; width: 100%"
+        />
+        <h5
+          class="position-absolute top-50 start-50 translate-middle texto-banner display-3 fw-bold"
+        >
+          FORMULARIOS WEB
+        </h5>
+      </div>
+    </section>
+
+    <!-- CREAR FORMULARIO -->
+    <section class="container my-5">
+      <div class="d-flex align-items-center">
+        <div class="text-center">
+          <img
+            src="img/fondo-mascara.jpg"
+            class="img-fluid rounded-circle w-75"
+            alt="..."
+          />
+        </div>
+        <div class="flex-grow-1 ms-5 text-center">
+          <div class="display-5 mb-3">
+            Lúcete y crea FORMULARIOS impactantes...
+          </div>
+          <a href="/forms" id="boton-form" class="btn btn-crear">CREAR</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="py-3 barra-separacion"></div>
+
+    <!-- CÍRCULOS -->
+    <section class="my-5">
+      <div class="row mx-5">
+        <div class="col-md-4 px-0">
+          <div class="imgSection">
+            <div class="fondoImg"></div>
+            <img
+              src="img/mano.png"
+              class="img-circle img-fluid"
+              alt="Logo Valida.me"
+            />
+          </div>
+          <h4 class="font-weight-bold text-center mt-3">Accesible</h4>
+        </div>
+
+        <div class="col-md-4 px-0">
+          <div class="imgSection">
+            <div class="fondoImg"></div>
+            <img
+              src="img/enlace.png"
+              class="img-circle img-fluid"
+              alt="Logo Valida.me"
+            />
+          </div>
+          <h4 class="font-weight-bold text-center mt-3">Dinámico</h4>
+        </div>
+
+        <div class="col-md-4 px-0">
+          <div class="imgSection">
+            <div class="fondoImg"></div>
+            <img
+              src="img/candado.png"
+              class="img-circle img-fluid"
+              alt="Logo Valida.me"
+            />
+          </div>
+          <h4 class="font-weight-bold text-center mt-3">Seguro</h4>
+        </div>
+      </div>
+    </section>
+
+    <div class="py-3 barra-separacion"></div>
+
+    <!-- TEAM -->
+    <div class="background-color mb-4">
+      <h1 class="pt-5 d-flex justify-content-center title-team-color">
+        Team Workers
+      </h1>
+      <div
+        id="carouselExampleSlidesOnly"
+        class="carousel slide mx-5 background-color"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div
+              class="row row-cols-1 row-cols-md-5 g-3 py-5 d-flex justify-content-center"
+            >
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div
+              class="row row-cols-1 row-cols-md-5 g-3 py-5 d-flex justify-content-center"
+            >
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div
+              class="row row-cols-1 row-cols-md-5 g-3 py-5 d-flex justify-content-center"
+            >
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="#">
+                  <div class="card h-100">
+                    <img
+                      src="img/usu.png"
+                      class="card-img-top w-50"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">El Pepe</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <main class="container mx-auto my-2">
-      <% if (user) { %>
-      <div class="">
-        <img
-          src="<%= user.profilePhoto %>"
-          alt=""
-          referrerpolicy="no-referrer"
-          class="rounded-circle"
-        />
-        <h2 class="h2">Hola, <%= `${user.firstName} ${user.lastName}` %></h2>
-        <h3 class="h3">Correo electrónico: <%= user.email %></h3>
-      </div>
-      <% } %>
-    </main>
+    <%- include('partials/footer.ejs') %>
   </body>
 </html>

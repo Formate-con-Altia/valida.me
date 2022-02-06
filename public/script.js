@@ -2,6 +2,7 @@ const dropZone = document.querySelector("#drop-on-me-babe"); // Contenedor que r
 const dragZone = document.querySelector("#drag-from-me-babe"); // Contenedor del que se arrastrarán los elementos
 const htmlCode = document.querySelector("#html-form-code"); // Código HTML generado, lo guardaríamos en la base de datos
 const butonCreateForm = document.querySelector("#boton-form");
+//const clonado = document.querySelector("#clonar");
 let numControls = 0;
 let url = ``;
 
@@ -25,6 +26,7 @@ async function handleClick() {
 new Sortable(dropZone, {
   group: "shared", // Cambiar de la dropZone a la dragZone
   animation: 150, // Añadimos una pequeña animación cuando se ordenen los elementos
+  filtered: ".filtered", // No permitimos que el campo del nombre formulario (de clase .filtered) se pueda mover.
   onAdd() {
     htmlCode.textContent = dropZone.innerHTML; // Si el contenido del contenedor cambia, actualizamos el código HTML
     numControls++;
@@ -35,7 +37,10 @@ new Sortable(dropZone, {
 });
 
 new Sortable(dragZone, {
-  group: "shared", // Cambiar de la dragZone a la dropZone
+  group: {
+    name: "shared", // Cambiar de la dragZone a la dropZone
+    //put: false, // No permitir poner elementos en esta lista
+  },
   sort: false, // En este contenedor no queremos cambiar el orden de los elementos
   onAdd() {
     htmlCode.textContent = dropZone.innerHTML;
@@ -45,6 +50,22 @@ new Sortable(dragZone, {
     }
   },
 });
+
+// new Sortable(clonado, {
+//   group: {
+//     name: "shared", // Cambiar de la dragZone a la dropZone
+//     pull: "clone", // Permite duplicar el elemento para utilizar varios.
+//     //put: false, // No permitir poner elementos en esta lista
+//   },
+//   sort: false, // En este contenedor no queremos cambiar el orden de los elementos
+//   onAdd() {
+//     htmlCode.textContent = dropZone.innerHTML;
+//     numControls--;
+//     if (numControls == 0) {
+//       enableForButton(false);
+//     }
+//   },
+// });
 
 butonCreateForm.addEventListener("click", (e) => {
   enableForButton(false);
@@ -67,7 +88,7 @@ const createFeedbackMessage = (type, message) => {
   alertPlaceholder.append(wrapper);
 };
 
-document.querySelector("button").addEventListener("click", async () => {
+butonCreateForm.addEventListener("click", async () => {
   try {
     const response = await fetch("/forms/create", {
       method: "POST",
@@ -75,7 +96,10 @@ document.querySelector("button").addEventListener("click", async () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ data: dropZone.innerHTML }),
+      body: JSON.stringify({
+        data: dropZone.innerHTML,
+        formTitle: document.querySelector("#formTitle").textContent,
+      }),
     });
 
     if (!response.ok) {

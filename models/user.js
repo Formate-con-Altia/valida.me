@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   email: String,
   source: String,
-  profilePhoto: String,
+  profilePhoto: { type: String, default: "https://via.placeholder.com/40" },
 });
 
 module.exports = mongoose.model("user", userSchema);
