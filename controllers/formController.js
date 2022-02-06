@@ -16,9 +16,8 @@ const createNewForm = async (req, res) => {
 
   // Obtenemos el texto de todos los labels
   const parsedLabels = parsedHtml
-    .querySelectorAll("label")
-    .map((elm) => elm.innerText);
-
+    .querySelectorAll("input, textarea")
+    .map((elm) => elm.attrs.placeholder);
   // Obtenemos los inputs y devolvemos un array de objetos con los atributos necesarios
   const parsedInputs = parsedHtml
     .querySelectorAll("input, textarea")
