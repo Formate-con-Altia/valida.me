@@ -11,15 +11,21 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav nav-color mr-3">
                 <a class="nav-background-color py-2 px-3" href="/">Inicio</a>
-                <a class="nav-background-color py-2 px-3" href="#">Formularios</a>
+                <% if (user) { %>
+                    <a class="nav-background-color py-2 px-3" href="/forms">Formularios</a>
+                <% } %>
                 <a class="nav-background-color py-2 px-3" href="#">Contacto</a>
                 <a class="nav-background-color py-2 px-3" href="#">FAQ</a>
-                <a class="nav-background-color py-2 px-3" href="#">Iniciar Sesión</a>
-                <a class="nav-background-color py-2 px-3" href="#">Registrarse</a>
-                <div class="px-2"></div>
-                <a class="nav-login" href="#">
-                    <img src="/img/login.png" alt="Icon Login / Register" class="w-50">
-                </a>
+                <% if (!user) { %>
+                    <a class="nav-background-color py-2 px-3" href="/login">Iniciar Sesión</a>
+                    <a class="nav-background-color py-2 px-3" href="/register">Registrarse</a>
+                <% } %>
+                <% if (user) { %>
+                    <div class="px-2"></div>
+                    <a class="nav-login" href="#">
+                        <img src="<%= user.profilePhoto %>" alt="Icon Login / Register" class="w-50">
+                    </a>
+                <% } %>
             </div>
         </div>
     </div>

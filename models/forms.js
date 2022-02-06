@@ -9,8 +9,20 @@ const fieldSchema = new Schema({
   label: String,
 });
 
-const formSchema = new Schema({
-  fields: [fieldSchema],
+const valueNameSchema = new Schema({
+  name: String,
+  value: String,
 });
 
-module.exports = model("form", formSchema);
+const responseFormSchema = new Schema({
+  idForm: Schema.Types.ObjectId,
+  values: [valueNameSchema],
+});
+
+const formSchema = new Schema({
+  fields: [fieldSchema],
+  responses: [{ type: Schema.Types.ObjectId, ref: "responses" }],
+});
+
+exports.Form = model("form", formSchema);
+exports.Response = model("responses", responseFormSchema);
