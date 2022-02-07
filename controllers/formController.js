@@ -58,16 +58,31 @@ const createNewForm = async (req, res) => {
 
   // Obtenemos el texto de todos los labels
   const parsedLabels = parsedHtml
+    .querySelectorAll("label")
+    .map((elm) => elm.innerText);
+
+  // Inicializamos el índice para iterar sobre cada label
+  let labelIndex = 0;
+
+  // Obtenemos el texto de todos los placeholders
+  const parsedPlaceholders = parsedHtml
     .querySelectorAll("input, textarea")
-    .map((elm) => elm.attrs.placeholder);
+    .map((elm) => {
+      if (!elm.attrs.placeholder) {
+        return parsedLabels[labelIndex++];
+      }
+
+      return elm.attrs.placeholder;
+    });
+
   // Obtenemos los inputs y devolvemos un array de objetos con los atributos necesarios
   const parsedInputs = parsedHtml
     .querySelectorAll("input, textarea")
     .map((elm, i) => {
       return {
-        name: `${slugify(parsedLabels[i])}[${i}]`,
+        name: `${slugify(parsedPlaceholders[i])}[${i}]`,
         input: elm.attrs.type,
-        label: parsedLabels[i],
+        label: parsedPlaceholders[i],
       };
     });
 
@@ -115,7 +130,9 @@ const createResponse = async (req, res) => {
   // Actualizar el documento de la base de datos
   await form.save();
 
-  res.status(201).send("Respuestas guardadas correctamente");
+  req.flash("success", "Respuestas guardadas correctamente");
+
+  res.status(201).redirect("/");
 };
 
 const getCreatedForm = async (req, res) => {

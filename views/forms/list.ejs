@@ -2,15 +2,21 @@
 <html lang="en">
   <head>
     <%- include('../partials/head.ejs') %>
-    <title>Document</title>
   </head>
   <body>
-    <% forms.forEach(form => { %>
-    <p>
-      <a href="http://localhost:3000/forms/<%= form._id %>/responses"
-        ><%= form.title %></a
-      >
-    </p>
-    <% }) %>
+    <%- include('../partials/header.ejs') %>
+
+    <main class="container mx-auto my-4 w-25 main">
+      <div class="list-group">
+        <% forms.forEach(form => { %>
+        <a
+          class="list-group-item list-group-item-action"
+          href="/forms/<%= form._id %>/responses"
+          ><%= form.title %></a
+        >
+        <% }) %>
+      </div>
+    </main>
+    <%- include('../partials/footer.ejs') %>
   </body>
 </html>

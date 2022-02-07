@@ -36,7 +36,7 @@ passport.use(
 
       // El usuario ha sido registrado utilizando otro método de autenticación
       if (currentUser.source !== "google") {
-        return done(null, false, { message: "Tu cuenta ya está registrada." });
+        return done(null, false, { message: "Esa cuenta ya está registrada." });
       }
 
       // Devolvemos el usuario existente

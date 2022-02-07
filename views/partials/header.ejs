@@ -1,32 +1,61 @@
 <nav class="navbar navbar-expand-lg background-color p-0">
-    <div class="container-fluid mx-5 my-2">
-        <div>
-            <a href="/">
-                <img src="/img/logo.png" alt="Logo Valida.me" class="w-25">
-            </a>
-        </div>
-        <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-            <div class="navbar-nav nav-color mr-3">
-                <a class="nav-background-color py-2 px-3" href="/">Inicio</a>
-                <% if (user) { %>
-                    <a class="nav-background-color py-2 px-3" href="/forms">Formularios</a>
-                <% } %>
-                <a class="nav-background-color py-2 px-3" href="#">Contacto</a>
-                <a class="nav-background-color py-2 px-3" href="#">FAQ</a>
-                <% if (!user) { %>
-                    <a class="nav-background-color py-2 px-3" href="/login">Iniciar Sesión</a>
-                    <a class="nav-background-color py-2 px-3" href="/register">Registrarse</a>
-                <% } %>
-                <% if (user) { %>
-                    <div class="px-2"></div>
-                    <a class="nav-login" href="#">
-                        <img src="<%= user.profilePhoto %>" alt="Icon Login / Register" class="w-50">
-                    </a>
-                <% } %>
-            </div>
-        </div>
+  <div class="container-fluid mx-5 my-2">
+    <div>
+      <a href="/">
+        <img src="/img/logo.png" alt="Logo Valida.me" class="w-25" />
+      </a>
     </div>
+    <button
+      class="navbar-toggler navbar-light"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavAltMarkup"
+    >
+      <div class="navbar-nav nav-color mr-3 align-items-center">
+        <a class="nav-background-color py-2 px-3" href="/">Inicio</a>
+        <% if (user) { %>
+        <a class="nav-background-color py-2 px-3" href="/forms"
+          >Crear formulario</a
+        >
+        <a class="nav-background-color py-2 px-3" href="/forms/list"
+          >Mis formularios</a
+        >
+        <% } %>
+        <a class="nav-background-color py-2 px-3" href="#">Contacto</a>
+        <a class="nav-background-color py-2 px-3" href="#">FAQ</a>
+        <% if (!user) { %>
+        <a class="nav-background-color py-2 px-3" href="/login"
+          >Iniciar Sesión</a
+        >
+        <a class="nav-background-color py-2 px-3" href="/register"
+          >Registrarse</a
+        >
+        <% } %>
+
+        <div class="px-2"></div>
+
+        <% if (user) { %>
+        <a class="nav-background-color py-2 px-3" href="/logout">Salir</a>
+
+        <a class="nav-login mx-2" href="#">
+          <img
+            src="<%= user.profilePhoto %>"
+            alt="Profile"
+            referrerpolicy="no-referrer"
+            class="rounded-circle w-50 border border-1 border-secondary"
+          />
+        </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </nav>

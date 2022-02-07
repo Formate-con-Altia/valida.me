@@ -2,18 +2,12 @@
 <html lang="es">
   <head>
     <%- include('../partials/head.ejs') %>
-    <title>Drag & Drop</title>
-  </head>
-
-  <head>
-    <%- include('../partials/head.ejs') %>
-    <title>Crear Formulario</title>
   </head>
 
   <body>
     <%- include('../partials/header.ejs') %>
 
-    <main class="container mx-auto">
+    <main class="container mx-auto main">
       <div class="my-5">
         <h1 class="d-flex justify-content-center">CREA TU FORMULARIO</h1>
         <h2 class="modificar-h2 d-flex justify-content-center">
@@ -47,12 +41,21 @@
         <div class="col-sm-6">
           <div class="card h-100 color-fondo-drag">
             <div id="drag-from-me-babe" class="card-body w-75">
-              <!-- <div class="my-3" id="clonar">
-              <div>
-                <label contentEditable="true" class="fw-bold form-label">Campo personalizado</label>
-                <input type="text" class="form-control sombreado-campos" readonly/>
+              <div class="my-3" id="clonar">
+                <div class="mt-2">
+                  <label
+                    contentEditable="true"
+                    class="fw-bold form-label text-muted"
+                    >Campo personalizado</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control sombreado-campos"
+                    style="cursor: pointer"
+                    readonly
+                  />
+                </div>
               </div>
-            </div> -->
 
               <div class="my-3">
                 <input
@@ -119,7 +122,6 @@
     <%- include('../partials/footer.ejs') %>
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-
     <script src="/script.js"></script>
   </body>
 </html>
