@@ -2,9 +2,8 @@ const dropZone = document.querySelector("#drop-on-me-babe"); // Contenedor que r
 const dragZone = document.querySelector("#drag-from-me-babe"); // Contenedor del que se arrastrarán los elementos
 const htmlCode = document.querySelector("#html-form-code"); // Código HTML generado, lo guardaríamos en la base de datos
 const butonCreateForm = document.querySelector("#boton-form");
-//const clonado = document.querySelector("#clonar");
+const clonado = document.querySelector("#clonar");
 let numControls = 0;
-let url = ``;
 
 function enableForButton(enable) {
   if (enable) {
@@ -51,21 +50,21 @@ new Sortable(dragZone, {
   },
 });
 
-// new Sortable(clonado, {
-//   group: {
-//     name: "shared", // Cambiar de la dragZone a la dropZone
-//     pull: "clone", // Permite duplicar el elemento para utilizar varios.
-//     //put: false, // No permitir poner elementos en esta lista
-//   },
-//   sort: false, // En este contenedor no queremos cambiar el orden de los elementos
-//   onAdd() {
-//     htmlCode.textContent = dropZone.innerHTML;
-//     numControls--;
-//     if (numControls == 0) {
-//       enableForButton(false);
-//     }
-//   },
-// });
+new Sortable(clonado, {
+  group: {
+    name: "shared", // Cambiar de la dragZone a la dropZone
+    pull: "clone", // Permite duplicar el elemento para utilizar varios.
+    //put: false, // No permitir poner elementos en esta lista
+  },
+  sort: false, // En este contenedor no queremos cambiar el orden de los elementos
+  onAdd() {
+    htmlCode.textContent = dropZone.innerHTML;
+    numControls--;
+    if (numControls == 0) {
+      enableForButton(false);
+    }
+  },
+});
 
 butonCreateForm.addEventListener("click", (e) => {
   enableForButton(false);
@@ -110,7 +109,7 @@ butonCreateForm.addEventListener("click", async () => {
     }
 
     const data = await response.json(); // Obtenemos los datos del servidor
-    url = `http://localhost:3000/forms/${data.id}`;
+
     const successMessage = `¡Formulario creado correctamente! Puedes visualizarlo en esta <a href="/forms/${data.id}" id="js-copy-link" class="alert-link" target="_blank">URL</a>.`;
     // Si todo ha ido bien, confirmamos la creación del formulario
     createFeedbackMessage("success", successMessage);
