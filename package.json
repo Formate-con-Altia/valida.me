@@ -4,7 +4,8 @@
   "description": "Creación de formularios dinámicos",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "serve": "nodemon ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
