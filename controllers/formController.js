@@ -41,7 +41,7 @@ const getResponses = async (req, res) => {
     .unwind("fields");
 
   res.render("forms/responses", {
-    path: req.protocol + "://" + req.get("host") + req.originalUrl,
+    path: req.protocol + "s://" + req.get("host") + req.originalUrl,
     form,
   });
 };
