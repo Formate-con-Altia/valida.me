@@ -2,7 +2,9 @@
 
 ## Descripción
 
-Validame es un proyecto desarrollado por los alumnos del curso Full Stack Developer, impartido por [Altia](https://www.altia.es/), junto al formador [Óscar Miras](https://github.com/omiras).
+Validame es un proyecto de creación y cubrimiento de formularios en la nube, desarrollado por los alumnos del curso Full Stack Developer, impartido por [Altia](https://www.altia.es/), junto al formador [Óscar Miras](https://github.com/omiras).
+
+[Live Demo](https://validame.herokuapp.com/)
 
 ## Instalación y uso
 
