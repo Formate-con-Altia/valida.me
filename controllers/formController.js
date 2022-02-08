@@ -3,13 +3,15 @@ const { Types } = require("mongoose");
 const { parse } = require("node-html-parser");
 const { slugify } = require("../lib/helpers");
 
-const showForms = async (req, res) => {
+// GET /forms/list
+exports.showForms = async (req, res) => {
   let forms = await Form.find({ userId: req.user._id });
 
   res.render("forms/list", { forms });
 };
 
-const showResponses = async (req, res) => {
+// GET /forms/:id/responses/json
+exports.showResponses = async (req, res) => {
   const id = Types.ObjectId(req.params.id);
 
   const values = await Response.aggregate()
@@ -32,7 +34,8 @@ const showResponses = async (req, res) => {
   res.json(results);
 };
 
-const getResponses = async (req, res) => {
+// GET /forms/:id/responses
+exports.getResponses = async (req, res) => {
   const id = Types.ObjectId(req.params.id);
 
   const form = await Form.aggregate()
@@ -41,19 +44,21 @@ const getResponses = async (req, res) => {
     .unwind("fields");
 
   res.render("forms/responses", {
-    path: req.protocol + "s://" + req.get("host") + req.originalUrl,
+    path: req.protocol + "://" + req.get("host") + req.originalUrl,
     form,
   });
 };
 
-const createForm = (req, res) => {
+// GET /forms
+exports.createForm = (req, res) => {
   if (!req.user || !req.user._id) {
     return res.redirect("/");
   }
   res.render("forms/index");
 };
 
-const createNewForm = async (req, res) => {
+// POST /forms/create
+exports.createNewForm = async (req, res) => {
   const parsedHtml = parse(req.body.data);
 
   // Obtenemos el texto de todos los labels
@@ -95,7 +100,8 @@ const createNewForm = async (req, res) => {
   res.status(201).send({ id: form._id });
 };
 
-const createResponse = async (req, res) => {
+// POST /forms/formResponse
+exports.createResponse = async (req, res) => {
   let datos = req.body;
   var keys = Object.keys(datos);
   let nameValues = [];
@@ -130,36 +136,17 @@ const createResponse = async (req, res) => {
   // Actualizar el documento de la base de datos
   await form.save();
 
-  req.flash("success", "Respuestas guardadas correctamente");
+  req.flash("success", "Respuestas guardadas correctamente.");
 
   res.status(201).redirect("/");
 };
 
-const getCreatedForm = async (req, res) => {
+// GET /forms/:id
+exports.getCreatedForm = async (req, res) => {
   const { id } = req.params;
 
-  if (!Types.ObjectId.isValid(id))
-    return res.status(404).send("Recurso no encontrado");
+  if (!Types.ObjectId.isValid(id)) return res.status(404).render("errors/404");
 
   const form = await Form.findOne({ _id: id });
   res.status(200).render("forms/id", { form });
-
-  // try {
-  //       const form = await Form.findOne({ _id: id });
-
-  //       res.status(200).render("forms/id", { form });
-  //   } catch (error) {
-  //       console.error(error);
-  //       res.status(404).send("Recurso no existente");
-  //   }
-};
-
-module.exports = {
-  createForm,
-  createNewForm,
-  createResponse,
-  getCreatedForm,
-  showForms,
-  showResponses,
-  getResponses,
 };

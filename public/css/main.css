@@ -176,3 +176,7 @@ body {
     cursor: not-allowed;
   }
 }
+
+.w-30 {
+  width: 30% !important;
+}

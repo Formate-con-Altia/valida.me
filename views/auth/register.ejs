@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <%- include("../partials/head") %>
   </head>
   <body>
     <%- include("../partials/header") %>
 
-    <main class="container mx-auto w-25 main">
+    <main class="container mx-auto w-30 main">
       <h1 class="h1 my-4">Registrarse</h1>
 
       <!-- Comprobación de los errores devueltos por el formulario -->
-      <% if (typeof errors !== 'undefined') { %>
-      <div class="alert alert-danger p-3 my-3">
-        <% errors.forEach(error => { %>
-        <p class="m-0"><%= error.msg %></p>
-        <% }) %>
-      </div>
-      <% } %>
+      <%- include('../components/alert-errors.ejs') %>
 
       <!-- Comprobación de los errores devueltos por passport -->
-      <% if (error.length > 0) { %>
-      <div class="alert alert-danger p-3 my-3">
-        <p class="m-0"><%= error %></p>
-      </div>
-      <% } %>
+      <%- include('../components/alerts.ejs') %>
 
       <form action="" method="POST">
         <div class="mb-3">

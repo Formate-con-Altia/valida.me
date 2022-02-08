@@ -33,9 +33,11 @@ app.use(cookieParser("d1n0s3t0"));
 app.use(
   session({
     secret: "d1n0s3t0",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 },
+    cookie: {
+      secure: false,
+    },
   })
 );
 app.use(flash());
@@ -49,7 +51,7 @@ app.use(authRouter);
 app.use("/forms", formsRoutes);
 app.use("/user", userRoutes);
 
-app.use((req, res) => res.status(404).send("Recurso no encontrado"));
+app.use((req, res) => res.status(404).render("errors/404"));
 
 try {
   mongoose.connect(MONGO_URI);
