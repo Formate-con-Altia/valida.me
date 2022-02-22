@@ -17,6 +17,8 @@ Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Alti
 - MongoDB - Sistema de base de datos NoSQL. Lenguaje JavaScript. Facilidad y escalabilidad en su uso
 - Bootstrap 5.0 - Librería que simplifica el diseño y la adaptación del mismo para cualquier agente de usuario
 
+[Wiki](https://github.com/Formate-con-Altia/valida.me/wiki)
+
 ## Instalación
 
 Instalar las dependencias:
