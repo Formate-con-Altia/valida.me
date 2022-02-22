@@ -7,9 +7,6 @@ Validame es una aplicación destinada a simplificar las tareas administrativas d
 
 Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Altia](https://www.altia.es/), junto al formador [Óscar Miras](https://github.com/omiras).
 
-
-[Demo](https://validame.herokuapp.com/)
-
 <a href="https://validame.herokuapp.com/" target="_blank">Demo</a>
 
 ## Tecnologías
