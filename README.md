@@ -3,7 +3,7 @@
 ## Descripción
 
 
-Validame es una aplicación destinada a simplificar las tareas administrativas de empresas, con la creación y cubrimiento de formularios personalizados online.
+Validame es una aplicación destinada a mejorar la productividad en entornos de empresa o usuario personal. Permite unificar en una sola aplicación, las tareas administrativas necesarias para solicitar y recopilar información de nuestros clientes.
 
 Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Altia](https://www.altia.es/), junto al formador [Óscar Miras](https://github.com/omiras).
 
