@@ -8,7 +8,7 @@ Validame es una aplicación destinada a simplificar las tareas administrativas d
 Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Altia](https://www.altia.es/), junto al formador [Óscar Miras](https://github.com/omiras).
 
 
-[Live Demo](https://validame.herokuapp.com/)
+[Demo](https://validame.herokuapp.com/)
 
 ## Tecnologías
 
@@ -17,7 +17,7 @@ Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Alti
 - MongoDB - Sistema de base de datos NoSQL. Lenguaje JavaScript. Facilidad y escalabilidad en su uso
 - Bootstrap 5.0 - Librería que simplifica el diseño y la adaptación del mismo para cualquier agente de usuario
 
-[Wiki](https://github.com/Formate-con-Altia/valida.me/wiki)
+[Más información](https://github.com/Formate-con-Altia/valida.me/wiki)
 
 ## Instalación
 
