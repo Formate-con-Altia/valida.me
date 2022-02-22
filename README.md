@@ -10,6 +10,8 @@ Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Alti
 
 [Demo](https://validame.herokuapp.com/)
 
+<a href="https://validame.herokuapp.com/" target="_blank">Demo</a>
+
 ## Tecnologías
 
 - NodeJS - Nos permite tener una aplicación web o API, del lado servidor, usando JavaScript
