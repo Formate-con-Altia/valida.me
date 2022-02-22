@@ -12,10 +12,10 @@ Desarrollado por los alumnos del curso Full Stack Developer, impartido por [Alti
 
 ## Tecnologías
 
-NodeJS - Nos permite tener una aplicación web o API, del lado servidor, usando JavaScript
-Express - Dota de funcionalidades y minimalismo extra a NodeJS en cuanto a las aplicaciones web o API's
-MongoDB - Sistema de base de datos NoSQL. Lenguaje JavaScript. Facilidad y escalabilidad en su uso
-Bootstrap 5.0 - Librería que simplifica el diseño y la adaptación del mismo para cualquier agente de usuario
+- NodeJS - Nos permite tener una aplicación web o API, del lado servidor, usando JavaScript
+- Express - Dota de funcionalidades y minimalismo extra a NodeJS en cuanto a las aplicaciones web o API's
+- MongoDB - Sistema de base de datos NoSQL. Lenguaje JavaScript. Facilidad y escalabilidad en su uso
+- Bootstrap 5.0 - Librería que simplifica el diseño y la adaptación del mismo para cualquier agente de usuario
 
 ## Instalación
 
