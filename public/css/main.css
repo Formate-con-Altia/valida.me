@@ -51,7 +51,7 @@
   background-color: var(--gris-claro);
 }
 
-.fondoImg {
+/*.fondoImg {
   background-color: var(--gris-oscuro);
   position: absolute;
   left: 25%;
@@ -71,7 +71,7 @@
   height: 40%;
   left: 40%;
   top: 30%;
-}
+}*/
 
 .title-team-color {
   color: var(--azul);

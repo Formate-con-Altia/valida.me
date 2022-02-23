@@ -49,52 +49,38 @@
     <div class="py-3 barra-separacion"></div>
 
     <!-- CÍRCULOS -->
-    <section class="my-5">
-      <div class="row mx-5">
-        <div class="col-md-4 px-0">
-          <div class="imgSection">
-            <div class="fondoImg"></div>
-            <img
-              src="img/mano.png"
-              class="img-circle img-fluid"
-              alt="Logo Valida.me"
-            />
+      
+      <section class="my-4 text-center">
+        <div class="row d-flex justify-content-evenly">
+        <div class="col-lg-4">
+          <div class="bg-secondary rounded-circle mx-auto p-4 w-25">
+            <i class="bi bi-hand-index fs-1 text-white"></i>
           </div>
           <h4 class="font-weight-bold text-center mt-3">Accesible</h4>
         </div>
-
-        <div class="col-md-4 px-0">
-          <div class="imgSection">
-            <div class="fondoImg"></div>
-            <img
-              src="img/enlace.png"
-              class="img-circle img-fluid"
-              alt="Logo Valida.me"
-            />
+  
+        <div class="col-lg-4 mx-auto">
+          <div class="bg-secondary rounded-circle mx-auto p-4 w-25">
+            <i class="bi bi-share fs-1 text-white"></i>
           </div>
           <h4 class="font-weight-bold text-center mt-3">Dinámico</h4>
         </div>
-
-        <div class="col-md-4 px-0">
-          <div class="imgSection">
-            <div class="fondoImg"></div>
-            <img
-              src="img/candado.png"
-              class="img-circle img-fluid"
-              alt="Logo Valida.me"
-            />
+  
+        <div class="col-lg-4 mx-auto">
+          <div class="bg-secondary rounded-circle mx-auto p-4 w-25">
+            <i class="bi bi-lock fs-1 text-white"></i>
+  
           </div>
           <h4 class="font-weight-bold text-center mt-3">Seguro</h4>
         </div>
-      </div>
-    </section>
+     </section>
 
     <div class="py-3 barra-separacion"></div>
 
     <!-- TEAM -->
     <div class="background-color mb-4">
       <h1 class="pt-5 d-flex justify-content-center title-team-color">
-        Team Workers
+        Equipo de Desarrollo
       </h1>
       <div
         id="carouselExampleSlidesOnly"
@@ -106,214 +92,22 @@
             <div
               class="row row-cols-1 row-cols-md-5 g-3 py-5 d-flex justify-content-center"
             >
-              <div class="col">
-                <a href="#">
+            <% members.forEach(member => { %>
+                 <div class="col">
+                  <a href="https://github.com/<%= member.github %>">
                   <div class="card h-100">
                     <img
-                      src="img/usu.png"
+                      src="<%= member.image %>"
                       class="card-img-top w-50"
                       alt="..."
                     />
                     <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
+                      <h5 class="card-title"><%= member.name %></h5>
                     </div>
                   </div>
                 </a>
               </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div
-              class="row row-cols-1 row-cols-md-5 g-3 py-5 d-flex justify-content-center"
-            >
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div
-              class="row row-cols-1 row-cols-md-5 g-3 py-5 d-flex justify-content-center"
-            >
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="#">
-                  <div class="card h-100">
-                    <img
-                      src="img/usu.png"
-                      class="card-img-top w-50"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">El Pepe</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
+            <% }) %>
             </div>
           </div>
         </div>
