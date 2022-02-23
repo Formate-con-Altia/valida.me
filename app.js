@@ -20,6 +20,7 @@ require("./config/google");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+const NODE_ENV = process.env.NODE_ENV;
 const MONGO_URI = process.env.MONGO_URI;
 
 app.set("view engine", "ejs");
@@ -35,7 +36,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true,
+      secure: NODE_ENV === "dev" ? false : true,
     },
   })
 );
