@@ -1,12 +1,18 @@
 require("dotenv").config();
+const https = require("https");
+const fs = require("fs");
 
+// This line is from the Node.js HTTPS documentation.
+const options = {
+  key: fs.readFileSync("./client-key.pem"),
+  cert: fs.readFileSync("./client-cert.pem"),
+};
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
 const flash = require("express-flash");
-const cookieParser = require("cookie-parser");
 const { globalVars } = require("./lib/auth");
 
 const index = require("./routes/index");
@@ -24,19 +30,18 @@ const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
 
 app.set("view engine", "ejs");
+app.set("trust proxy", 1);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cookieParser("d1n0s3t0"));
 app.use(
   session({
     secret: "d1n0s3t0",
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: false,
       secure: true,
     },
   })
@@ -56,7 +61,12 @@ app.use((req, res) => res.status(404).render("errors/404"));
 
 try {
   mongoose.connect(MONGO_URI);
-  app.listen(PORT);
+  ///app.listen(PORT);
+  const server = https.createServer(
+    { key: options.key, cert: options.cert },
+    app
+  );
+  server.listen(PORT);
   console.log(`> Servidor escuchando en http://localhost:${PORT}`);
 } catch (error) {
   console.error(error);
