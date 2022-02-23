@@ -1,12 +1,5 @@
 require("dotenv").config();
-const https = require("https");
-const fs = require("fs");
 
-// This line is from the Node.js HTTPS documentation.
-const options = {
-  key: fs.readFileSync("./client-key.pem"),
-  cert: fs.readFileSync("./client-cert.pem"),
-};
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
@@ -61,12 +54,7 @@ app.use((req, res) => res.status(404).render("errors/404"));
 
 try {
   mongoose.connect(MONGO_URI);
-  ///app.listen(PORT);
-  const server = https.createServer(
-    { key: options.key, cert: options.cert },
-    app
-  );
-  server.listen(PORT);
+  app.listen(PORT);
   console.log(`> Servidor escuchando en http://localhost:${PORT}`);
 } catch (error) {
   console.error(error);
