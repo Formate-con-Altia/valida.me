@@ -31,7 +31,8 @@ Añadir las siguientes líneas en el archivo `.env` :
 GOOGLE_CLIENT_ID=889416653045-4c5mbgsjmnfrvt1rkvqfafi5crsaumjj.apps.googleusercontent.com  
 GOOGLE_CLIENT_SECRET=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  
 
-Adicionalmente, decir que la MONGO_URI dentro de este archivo, utiliza una dirección local, se recomienda crear y/o usar una propia.  
+Adicionalmente, decir que la MONGO_URI dentro de este archivo utiliza una dirección local, se recomienda tener instalado el servidor de MongoDB.
+https://www.mongodb.com/try/download/community
 
 Iniciar el servidor:
 
