@@ -32,8 +32,8 @@ GOOGLE_CLIENT_ID=889416653045-4c5mbgsjmnfrvt1rkvqfafi5crsaumjj.apps.googleuserco
 GOOGLE_CLIENT_SECRET=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  
 
 Adicionalmente, decir que la MONGO_URI dentro de este archivo utiliza una dirección local, por lo que hay que tener instalado el servidor de MongoDB.
-https://www.mongodb.com/try/download/community
-Y crear una conexión con el siguiente string: mongodb://localhost:27017/validame
+https://www.mongodb.com/try/download/community  
+Y crear una conexión con el siguiente string: mongodb://localhost:27017/validame  
 
 Otra opción es cambiar la MONGO_URI por la dirección de una base de datos MongoDB que tengas creada.
 
