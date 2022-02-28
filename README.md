@@ -34,6 +34,8 @@ GOOGLE_CLIENT_SECRET=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
 Adicionalmente, decir que la MONGO_URI dentro de este archivo utiliza una dirección local, se recomienda tener instalado el servidor de MongoDB.
 https://www.mongodb.com/try/download/community
 
+Otra opción es cambiar la MONGO_URI por la dirección de una base de datos MongoDB que tengas creada.
+
 Iniciar el servidor:
 
 ```bash
