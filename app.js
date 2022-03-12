@@ -45,6 +45,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(globalVars);
 
+if (NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.header("x-forwarded-proto") !== "https") {
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    } else {
+      next();
+    }
+  });
+}
+
 // Rutas de la aplicación
 app.use(index);
 app.use(authRouter);
