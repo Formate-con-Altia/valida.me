@@ -31,9 +31,8 @@ Copiar el archivo `.env.example` y renombrarlo a `.env`.
 Añadir las siguientes líneas en el archivo `.env` :
 
 ```
-GOOGLE_CLIENT_ID=889416653045-4c5mbgsjmnfrvt1rkvqfafi5crsaumjj.apps.googleusercontent.com  
-GOOGLE_CLIENT_SECRET=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  
-```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
 Adicionalmente, decir que la `MONGO_URI` dentro de este archivo utiliza una dirección local, por lo que hay que tener instalado el servidor de MongoDB.
 
