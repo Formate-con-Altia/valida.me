@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Creación de formularios dinámicos",
   "main": "app.js",
+    "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node ./app.js",
     "serve": "nodemon ./app.js",
