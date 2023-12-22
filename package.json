@@ -2,7 +2,7 @@
   "name": "valida.me",
   "version": "1.0.0",
   "description": "Creación de formularios dinámicos",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node ./app.js",
     "serve": "nodemon ./app.js",
